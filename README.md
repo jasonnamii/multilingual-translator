@@ -2,6 +2,11 @@
 
 **Multilingual translation for structured .md documents with structure-matching QC.**
 
+## Prerequisites
+
+- **Obsidian Vault** — QC validation script counts wikilinks (`[[...]]`) and embeds (`![[...]]`) for structure preservation
+- **Claude Cowork or Claude Code** environment
+
 ## Goal
 
 multilingual-translator automates multi-language publishing: establishes English as baseline, translates in parallel, validates structure preservation across callouts, tables, wikilinks, and HTML divs.
