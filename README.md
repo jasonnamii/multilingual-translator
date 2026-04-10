@@ -1,5 +1,7 @@
 # multilingual-translator
 
+> 🇰🇷 [한국어 README](./README.ko.md)
+
 **Multilingual translation for structured .md documents with structure-matching QC.**
 
 ## Prerequisites
