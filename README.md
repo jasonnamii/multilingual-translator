@@ -1,14 +1,35 @@
-# Multilingual Translator
+# multilingual-translator
 
-**Translation with structure-matching QC.**
+**Multilingual translation for structured .md documents with structure-matching QC.**
 
-Translates structured `.md` while preserving callouts, tables, wikilinks, HTML divs. Source → English first → others parallel. QC verifies structural parity.
+## Goal
 
-### Example Prompts
+multilingual-translator automates multi-language publishing: establishes English as baseline, translates in parallel, validates structure preservation across callouts, tables, wikilinks, and HTML divs.
 
-```
-"Translate to English, Chinese, Japanese" → EN baseline→CN+JP parallel→structure QC→fix
-```
+## When & How to Use
+
+Trigger when you have a structured .md document to translate. Always translates to English first (baseline), then other languages in parallel. Validates structural parity after every translation.
+
+## Use Cases
+
+| Scenario | Prompt | What Happens |
+|---|---|---|
+| Translate to 3 languages | `"Translate README to Spanish, French, German"` | EN baseline→parallel ES/FR/DE→QC: verify structure match→3 translated files |
+| Multi-language API docs | `"Translate API docs to 5 languages, code blocks untouched"` | EN version→preserve code fences→5 languages→structure validation |
+| Batch translation | `"Translate 10 docs to Japanese, Korean, Chinese"` | Sub-agent parallelization→validate each independently→coverage report |
+
+## Key Features
+
+- English-first baseline for canonical version
+- Parallel translation to N languages simultaneously
+- Structure-matching QC: callouts, tables, wikilinks, HTML divs, code blocks preserved
+- Sub-agent management for parallel document handling
+- Validation report with structure match percentage
+
+## Works With
+
+- **[deliverable-engine](https://github.com/jasonnamii/deliverable-engine)** — structured docs ideal for translation
+- **[obsidian-markdown](https://github.com/jasonnamii/obsidian-markdown)** — translates Obsidian markdown with wikilinks intact
 
 ## Installation
 
@@ -26,7 +47,7 @@ Skills placed in `~/.claude/skills/` are automatically available in Claude Code 
 
 ## Part of Cowork Skills
 
-This is one of 25 custom skills. See the full catalog: [https://github.com/jasonnamii/cowork-skills](https://github.com/jasonnamii/cowork-skills)
+This is one of 25+ custom skills. See the full catalog: [github.com/jasonnamii/cowork-skills](https://github.com/jasonnamii/cowork-skills)
 
 ## License
 
