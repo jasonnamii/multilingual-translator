@@ -8,6 +8,7 @@ description: |
   P4: .md 문서를 다국어로 변환할 때, 번역본 구조 편차 수정 시, 서브에이전트 번역 관리 시.
   P5: _EN.md로, _CN.md로, _JP.md로, _TH.md로, _ID.md로.
   NOT: 일반 텍스트 번역(→직접수행), UP 수정(→up-manager), 단순 용어 확인(→직접수행).
+vault_dependency: SOFT
 ---
 
 # 다국어 번역 운영 도구
