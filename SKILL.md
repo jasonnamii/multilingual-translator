@@ -164,6 +164,19 @@ python3 ${CLAUDE_SKILL_DIR}/scripts/qc_diff.py <원본.md> <번역본.md> --json
 
 ---
 
+
+## §INV NO_WORK_LABEL (산출물·대화 본질 보호)
+
+| 항목 | 정의 |
+|------|------|
+| RULE | 산출물·대화 = 인간 언어. 작업 라벨 ZERO. (1만 페이지 1단어 = FAIL) |
+| 판정 | "이 단어, 이 대화 밖 사람이 사전 없이 읽을 수 있나?" NO → 작업 라벨 → 금지 |
+| ALLOW | 업계 전문용어(QC·LQA·i18n·l10n·DTP·CAT·TM·MT) · 고유명사(언어명·국가명) · 법조문 |
+| CONVERT | 라벨 발견 → 실명·평문 풀어쓰기. 예) "_EN/_CN/_JP/_TH/_ID" → 결과 파일명에 한정·본문 라벨 ✗ / "구조 일치 QC·서브에이전트" → 결과만 노출 |
+| SELF_CHECK | 번역본 출력 직전에 자체 스캔. 1개라도 발견 = 차단·재작성. paper-engine cascade 경유 시 INV 13 자동 적용 |
+
+---
+
 ## Gotchas
 
 - **가장 흔한 실패**: 번역 내용은 맞는데 구조(콜아웃 수, 테이블 구조, 위키링크)가 원본과 다름. apple-design-style 문서의 경우 div border/padding 값 불일치도 빈번. 에이전트가 "비슷하게" 만들기 때문. 반드시 속성값 전수 비교.
