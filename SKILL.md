@@ -16,7 +16,29 @@ version: 2.0.0
 
 구조화된 문서를 다국어로 번역할 때, **내용 번역보다 구조 일치가 더 자주 실패한다.** 이 스킬은 그 실패를 방지하는 운영 규칙과 QC 체크리스트를 제공한다.
 
+
+## Skill Boundaries
+
+- **하는 것** — 다국어 번역 운영 도구.
+- **안 하는 것** — 일반 텍스트 번역(→직접수행), UP 수정(→up-manager), 단순 용어 확인(→직접수행).
+
 ---
+
+## When to Use
+
+- 사용자가 "번역해줘", "번역 실행", "translate", "translate this", "다국어로 만들어줘." 같은 표현으로 발동
+- .md 문서를 다국어로 변환할 때, 번역본 구조 편차 수정 시, 서브에이전트 번역 관리 시.
+- **안 쓸 때** — 일반 텍스트 번역(→직접수행), UP 수정(→up-manager), 단순 용어 확인(→직접수행).
+
+
+## Prerequisites
+
+| # | 체크 | 미충족 시 |
+|---|------|-----------|
+| 1 | 대상·입력 명확 (스킬 발동 의도 확인) | 1줄 확인 후 진입 |
+| 2 | references/ 폴더 접근 가능 | inline fallback |
+| 3 | scripts/ 실행 권한 | 권한 보정 후 재시도 |
+
 
 ## ⛔ 절대 규칙 (5개)
 
@@ -79,7 +101,34 @@ python3 ${CLAUDE_SKILL_DIR}/scripts/validate.py .
 산출물·대화 작업 라벨 ZERO. → `shaper-skill/references/no-work-label.md`
 
 
-## Gotchas (Top 5 — 상세는 sub-agent-rules.md)
+## Output Path
+
+| 산출물 | 경로 |
+|---|---|
+| 주 산출물 | `mnt/outputs/translator-skill_{topic}_{YYYY-MM-DD}.md` |
+| 형식 | _EN.md로, _CN.md로, _JP.md로, _TH.md로, _ID.md로. |
+| 리서치 결과 (해당 시) | `{VAULT}/_skills research/translator-skill/{YYYY-MM-DD}_{topic}.md` |
+
+## Reference Index
+
+| 파일 | 내용 | 언제 |
+|---|---|---|
+| `references/post-doctor-notes.md` | post doctor notes | 해당 단계 진입 시 |
+| `references/qc-checklist.md` | qc checklist | 해당 단계 진입 시 |
+| `references/quality-techniques.md` | quality techniques | 해당 단계 진입 시 |
+| `references/sub-agent-rules.md` | sub agent rules | 해당 단계 진입 시 |
+| `references/workflow-detail.md` | workflow detail | 해당 단계 진입 시 |
+
+
+## Next Phase
+
+본 스킬 작업 후 자연스럽게 이어지는 흐름:
+
+- 후속 작업 → `직접수행`
+- 후속 작업 → `up-manager`
+- 후속 작업 → `직접수행`
+
+## Failure Modes (Gotchas) (Top 5 — 상세는 sub-agent-rules.md)
 
 - **가장 흔한 실패**: 번역 내용은 맞는데 구조(콜아웃·테이블·div) 편차 → qc_diff.py 통과 의무
 - **ID(인도네시아어) 1순위 위험**: 콜아웃 누락 + div 변경 + 신규 섹션 동시 발생 빈도 최고
